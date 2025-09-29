@@ -22,7 +22,11 @@ function Login(){
     }
     //로그인 버튼 누름
     const loginCheck = ()=>{
-        axios.post("영서아이피주소", idAndPw); //객체로 보내기
+        axios.post("http://10.10.55.80/auth/login", idAndPw).then(
+            resp=>
+            console.log(resp.data)
+        )
+        ; //객체로 보내기
     }
 
     //회원가입 버튼 누름
