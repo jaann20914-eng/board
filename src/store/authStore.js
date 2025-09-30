@@ -1,18 +1,24 @@
-import {create} from "zustand";
+import { create } from "zustand";
 
 
-const useAuthStore = create((set)=> ({
+const useAuthStore = create((set) => ({
 
-    user :"",
-    
-    isLogined :false,
-    
-    login : (user)=>{
-        return set( {user :user, isLogined:true} )
+    user: "",
+
+    isLogined: false,
+
+    login: (user) => {
+        sessionStorage.setItem("loginId", user);
+        set({ user: user, isLogined: true });
     },
 
-    logout : ()=>{
-        return set( {user:"", isLogined:false} )
+    logout: () => {
+        sessionStorage.removeItem("loginId");
+        set({ user: "", isLogined: false });
+    },
+    deleteId: () => {
+        sessionStorage.removeItem("loginId");
+        set({ user: "", isLogined: false });
     }
 
 }));

@@ -22,7 +22,7 @@ function SignIn() {
 
   const handleclicked = () => {
     console.log(membersignin.id + " : " + membersignin.pw);
-    axios.post(`http://10.5.5.3/auth`, membersignin);
+    axios.post(`http://10.10.55.80/auth`, membersignin);
   };
 const handleback = ()=>{
     navigate("/");

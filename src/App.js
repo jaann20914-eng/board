@@ -3,8 +3,8 @@ import './App.css';
 import { useState } from 'react';
 
 
-import {BrowserRouter as Router, Routes, Route, BrowserRouter} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SignIn from './signin/SignIn';
 import axios from "axios";
 import useAuthStore from './store/authStore';
@@ -14,28 +14,32 @@ import Board from './board/Board';
 
 
 
-axios.defaults.withCredentials =true; // axios가 자신이 가지고 있는 세션키가 있으면 보내게함
+axios.defaults.withCredentials = true; // axios가 자신이 가지고 있는 세션키가 있으면 보내게함
 
 function App() {
-  
-  const isLogined = useAuthStore((state)=>state.isLogined);
 
+  const isLogined = useAuthStore((state) => state.isLogined);
+  const loginId = sessionStorage.getItem("loginId");
+
+  if (sessionStorage.getItem("loginId")) {
+    loginId(sessionStorage.getItem("loginId"));
+  }
 
   return (
 
     <div className='container'>
 
 
-    <Router>
-    
-    <div className='container'>
-        <Routes>
-        <Route path="/" element={isLogined ? <Home /> : <Login />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/board" element={<Board />} />
-        </Routes>
-    </div>
-    </Router>
+      <Router>
+
+        <div className='container'>
+          <Routes>
+            <Route path="/" element={isLogined ? <Home /> : <Login />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/board" element={<Board />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }
