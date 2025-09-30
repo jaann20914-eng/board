@@ -1,0 +1,12 @@
+
+
+.homebox{
+    width: 400px;
+    height: 200px;
+    border: 1px solid black;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
