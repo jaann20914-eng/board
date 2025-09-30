@@ -8,12 +8,21 @@ const useAuthStore = create((set)=> ({
     isLogined :false,
     
     login : (user)=>{
-        return set( {user :user, isLogined:true} )
+        sessionStorage.setItem("loginId", user); // 세션 스토리지에 저장
+        
+        set( {user :user, isLogined:true} )
     },
 
     logout : ()=>{
-        return set( {user:"", isLogined:false} )
-    }
+        sessionStorage.removeItem("loginId"); // 세션 스토리지에서 제거
+        set( {user:"", isLogined:false} )
+    },
+
+    deleteUser: () => {
+    sessionStorage.removeItem("loginId");
+    set({ user: '' ,  isLogined:false});
+  }
+
 
 }));
 

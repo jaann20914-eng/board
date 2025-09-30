@@ -26,9 +26,12 @@ function Login(){
         axios.post("http://10.5.5.3/auth/login", idAndPw).then(
             resp=>{
             login(resp.data.loginId);
+            
             console.log(resp);
             }
-        ) ; //객체로 보내기
+        )  //객체로 보내기
+        .catch(resp=>{console.log(resp)})
+    
     }
 
     //회원가입 버튼 누름
@@ -40,7 +43,7 @@ function Login(){
     const test = ()=>{
         axios.get("http://10.5.5.3/auth/test")
     }
-
+        
 
        return (            
             <div className={styles.loginbox}>

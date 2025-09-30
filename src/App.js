@@ -19,12 +19,16 @@ axios.defaults.withCredentials =true; // axios가 자신이 가지고 있는 세
 function App() {
   
   const isLogined = useAuthStore((state)=>state.isLogined);
+  
+  const loginF =useAuthStore((state)=>state.login);
+  if(sessionStorage.getItem("loginId")){
+    loginF(sessionStorage.getItem("loginId"));}
+  
 
 
   return (
     <Router>
-    
-    <div className='container'>
+    <div className='container'> 
         <Routes>
         <Route path="/" element={isLogined ? <Home /> : <Login />} />
         <Route path="/signin" element={<SignIn />} />
