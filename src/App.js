@@ -13,10 +13,10 @@ function App() {
 
 
   return (
-<<<<<<< HEAD
-    <div className='container'>연동되는지 확인중</div>
 
-=======
+    <div className='container'>
+
+
     <Router>
     
     <div className='container'>
@@ -27,7 +27,7 @@ function App() {
         </Routes>
     </div>
     </Router>
->>>>>>> 32173d8466d3ffb5cf1817768bda7a520250721b
+    </div>
   );
 }
 
