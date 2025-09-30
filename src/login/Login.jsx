@@ -27,6 +27,7 @@ function Login(){
             resp=>{
             login(resp.data.loginId);
             console.log(resp);
+            sessionStorage.setItem("loginId",resp.data.loginId); // 로그인을 유지
             }
         ) ; //객체로 보내기
     }
