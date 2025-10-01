@@ -26,7 +26,7 @@ function Login() {
 
     //로그인 버튼 누름
     const loginCheck = ()=>{
-        axios.post("http://10.5.5.3/auth/login", idAndPw).then(
+        axios.post("http://10.10.55.80/auth/login", idAndPw).then(
             resp=>{
             login(resp.data.loginId);
             
@@ -45,7 +45,7 @@ function Login() {
 
     //테스트 버튼
     const test = ()=>{
-        axios.get("http://10.5.5.3/auth/test")
+        axios.get("http://10.10.55.80/auth/test")
     }
         
 

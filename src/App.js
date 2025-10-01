@@ -11,6 +11,7 @@ import useAuthStore from './store/authStore';
 import Home from './home/Home';
 import Login from './login/Login';
 import Board from './board/Board';
+import Mypage from './mypage/Mypage';
 
 
 
@@ -25,6 +26,7 @@ function App() {
     loginF(sessionStorage.getItem("loginId"));}
   
 
+  
 
   return (
 
@@ -37,6 +39,7 @@ function App() {
         <Route path="/" element={isLogined ? <Home /> : <Login />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/board" element={<Board />} />
+        <Route path="/mypage" element={<Mypage/>} />
         </Routes>
     </div>
     </Router>

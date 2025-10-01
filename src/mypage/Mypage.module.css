@@ -1,0 +1,7 @@
+.seen{
+    display: block;
+}
+
+.unseen{
+    display: none;
+}
