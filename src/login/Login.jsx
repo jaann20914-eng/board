@@ -24,28 +24,30 @@ function Login() {
 
   const login = useAuthStore((state) => state.login);
 
-  //로그인 버튼 누름
-  const loginCheck = () => {
-    axios
-      .post("http://10.10.55.80/auth/login", idAndPw)
-      .then((resp) => {
-        setLoginId(resp.data.loginId); // 함수로 로그인 ID 저장
-        console.log(resp);
-      })
-      .catch((error) => {
-        console.error("로그인 요청 실패:", error);
-      });
-  };
+    //로그인 버튼 누름
+    const loginCheck = ()=>{
+        axios.post("http://10.5.5.3/auth/login", idAndPw).then(
+            resp=>{
+            login(resp.data.loginId);
+            
+            console.log(resp);
+            sessionStorage.setItem("loginId",resp.data.loginId); // 로그인을 유지
+            }
+        )  //객체로 보내기
+        .catch(resp=>{console.log(resp)})
+    
+    }
 
   //회원가입 버튼 누름
   const signIn = () => {
     navigate("/signin");
   };
 
-  //테스트 버튼
-  const test = () => {
-    axios.get("http://10.10.55.80/auth/test");
-  };
+    //테스트 버튼
+    const test = ()=>{
+        axios.get("http://10.5.5.3/auth/test")
+    }
+        
 
   return (
     <div className={styles.loginbox}>
