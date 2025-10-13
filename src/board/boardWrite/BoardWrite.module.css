@@ -1,0 +1,26 @@
+
+
+.writeBox{
+    width: 800px;
+    height: 600px;
+    border : 1px solid black;
+    margin: auto;
+    overflow: hidden;
+}
+
+.title{
+    width: 100%;
+    height: 10%;
+    background-color: gainsboro;
+}
+
+.content{
+    width: 100%;
+    height: 80%;
+}
+
+.btns{
+    width: 100%;
+    height: 10%;
+    background-color: gainsboro;
+}

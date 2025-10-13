@@ -38,7 +38,7 @@ function App() {
         <Routes>
         <Route path="/" element={isLogined ? <Home /> : <Login />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/board" element={<Board />} />
+        <Route path="/board/*" element={<Board />} />
         <Route path="/mypage" element={<Mypage/>} />
         </Routes>
     </div>

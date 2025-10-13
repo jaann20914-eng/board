@@ -25,7 +25,7 @@ function Home() {
 
   //회원탈퇴 버튼 클릭
   const signout = () => {
-    axios.delete(`http://10.10.55.80/auth/${user}`).then(() => {
+    axios.delete(`http://10.5.5.3/auth/${user}`).then(() => {
       deleteUser();
     });
   };

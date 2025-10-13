@@ -18,7 +18,8 @@ const Mypage = () => {
   // 상태변수를 배열안에 넣을 경우 상태변수가 변할때 리랜더링을 해줘서 값이 다시 바뀌도록 출력이된다.
   // useEffect -> 한번만 실행되고 끝내게 하는 함수 / 상태변수가 바뀔때 다시 실행되게 할려면 밑에 처럼 작성.
   useEffect(() => {
-    axios.get(`http://10.10.55.80/auth?id=${user}`).then((resp) => {
+    axios.get(`http://10.5.5.3/auth?id=${user}`).then((resp) => {
+  
       const { id, pw, name, email } = resp.data;
       setEditItem({ id, pw, name, email }); //오리지날 보존용
       setUpdateItem({ id, pw, name, email }); // 업데이트용 (수정가능)
@@ -52,7 +53,7 @@ const handleInputChange = (e)=>{
   const handleUpdateCom = ()=>{
     setComplete(true);
     setUpdateItem(prev=>({...prev, id:editItem.id}));
-    axios.put(`http://10.10.55.80/auth?id=${user}`, updateItem);
+    axios.put(`http://10.5.5.3/auth?id=${user}`, updateItem);
     setEditing(false); //수정 불가
   }
 
