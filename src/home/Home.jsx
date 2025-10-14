@@ -25,7 +25,7 @@ function Home() {
 
   //회원탈퇴 버튼 클릭
   const signout = () => {
-    caxios.delete(`http://10.5.5.3/auth/${user}`).then(() => {
+    caxios.delete(`/auth/${user}`).then(() => {
       logout();
     });
   };

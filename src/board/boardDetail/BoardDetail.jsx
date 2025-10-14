@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams ,useNavigate} from "react-router-dom";
 import styles from "./BoardDetail.module.css";
 import useAuthStore from "../../store/authStore";
+import { caxios } from "../../interceptor/axiosConfig";
 
 function BoardDetail () {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ function BoardDetail () {
     //오리지날 객체 저장용
     const [oriBoard, setOriBoard] = useState({}); //객체로받음
     useEffect(() => {
-    axios.get(`http://10.5.5.3/board/${seq}`).then((resp) => {
+    caxios.get(`/board/${seq}`).then((resp) => {
         user == resp.data.writer ? setSameId(true) : setSameId(false);
         setOriBoard(resp.data); //오리보드에 내용 넣기
     });
@@ -25,7 +26,7 @@ function BoardDetail () {
 
     //삭제하기
     const handleDel =()=>{
-        axios.delete(`http://10.5.5.3/board/${seq}`).then(()=>{
+        caxios.delete(`/board/${seq}`).then(()=>{
             navigate("/board");
         })
     }
@@ -61,7 +62,7 @@ function BoardDetail () {
         const title = titleRef.current?.innerText || "";
         const content = contentRef.current?.innerText || "";
 
-        axios.put(`http://10.5.5.3/board/${seq}`, {title,content,writer: user}).then(() => {
+        caxios.put(`/board/${seq}`, {title,content,writer: user}).then(() => {
         setUpdating(false);
         navigate("/board");
         });

@@ -3,6 +3,7 @@ import useAuthStore from "../../store/authStore";
 import styles from "./BoardList.module.css"
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
+import { caxios } from "../../interceptor/axiosConfig";
 
 function BoardList () {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ function BoardList () {
 
     // 보드 전체 리스트 가져오기
     useEffect(() => {
-    axios.get(`http://10.5.5.3/board`).then((resp) => {
+    caxios.get(`/board`).then((resp) => {
         setBoardList(resp.data);// boardDTO형 배열 
     });
   }, []);// 한번만 가져오는 상태

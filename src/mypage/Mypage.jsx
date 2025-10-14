@@ -2,10 +2,11 @@ import axios from "axios";
 import useAuthStore from "../store/authStore";
 import styles from "./Mypage.module.css";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { caxios } from "../interceptor/axiosConfig";
 
 const Mypage = () => {
+  const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   const [complete, setComplete] = useState(false); // 버튼의 상태변수
   // ----------------------------------------------------------처음 가져오는객체 / getAll
@@ -87,7 +88,7 @@ const handleInputChange = (e)=>{
         </table>
         <div className={editing ? styles.unseen : styles.seen}>
           <button onClick={()=> setEditing(true)}>수정</button>
-          <button>뒤로가기</button>
+          <button onClick={()=> navigate("/")}>뒤로가기</button>
         </div>
 
         <div className={editing ? styles.seen : styles.unseen}>
