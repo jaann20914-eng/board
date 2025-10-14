@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   BrowserRouter as Router,
@@ -10,10 +10,13 @@ import {
 } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAuthStore from "../store/authStore";
+import { caxios } from "../interceptor/axiosConfig";
 
 function Login() {
-  const navigate = useNavigate(); // 여기서 Hook 호출
 
+  
+  
+  const navigate = useNavigate(); // 여기서 Hook 호출
   //사용자 입력 감지
   const [idAndPw, setIdAndPw] = useState({ id: "", pw: "" });
   const handleLoginChange = (e) => {
@@ -22,20 +25,20 @@ function Login() {
     setIdAndPw((prev) => ({ ...prev, [name]: value }));
   };
 
-  const login = useAuthStore((state) => state.login);
+    const {login, token, isLogined} = useAuthStore(state=>state);
+    console.log(isLogined);
 
     //로그인 버튼 누름
     const loginCheck = ()=>{
-        axios.post("http://10.5.5.3/auth/login", idAndPw).then(
+        caxios.post("/auth/login", idAndPw).then(
             resp=>{
-            login(resp.data.loginId);
-            
-            console.log(resp);
-            sessionStorage.setItem("loginId",resp.data.loginId); // 로그인을 유지
+            login(resp.data); // 토큰받아서 로그인에 저장
+              const { token, id } = resp.data;
+              sessionStorage.setItem("token", token);
+              login(token, id); // 사용자 정보도 저장
             }
         )  //객체로 보내기
         .catch(resp=>{console.log(resp)})
-    
     }
 
   //회원가입 버튼 누름
@@ -45,7 +48,7 @@ function Login() {
 
     //테스트 버튼
     const test = ()=>{
-        axios.get("http://10.5.5.3/auth/test")
+        caxios.get("/auth/test")
     }
         
 

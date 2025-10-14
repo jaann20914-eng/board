@@ -4,6 +4,7 @@ import styles from "./SignIn.module.css";
 import {BrowserRouter as Router, Routes, Route, BrowserRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { caxios } from "../interceptor/axiosConfig";
 
 function SignIn() {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ function SignIn() {
 
   const handleclicked = () => {
     console.log(membersignin.id + " : " + membersignin.pw);
-    axios.post(`http://10.5.5.3/auth`, membersignin);
+    caxios.post(`/auth`, membersignin);
   };
 const handleback = ()=>{
     navigate("/");

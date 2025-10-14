@@ -3,9 +3,10 @@ import useAuthStore from "../store/authStore";
 import styles from "./Mypage.module.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { caxios } from "../interceptor/axiosConfig";
 
 const Mypage = () => {
-  
+  const token = sessionStorage.getItem("token");
   const [complete, setComplete] = useState(false); // 버튼의 상태변수
   // ----------------------------------------------------------처음 가져오는객체 / getAll
   const user = useAuthStore((state) => state.user);
@@ -17,14 +18,15 @@ const Mypage = () => {
   });
   // 상태변수를 배열안에 넣을 경우 상태변수가 변할때 리랜더링을 해줘서 값이 다시 바뀌도록 출력이된다.
   // useEffect -> 한번만 실행되고 끝내게 하는 함수 / 상태변수가 바뀔때 다시 실행되게 할려면 밑에 처럼 작성.
-  useEffect(() => {
-    axios.get(`http://10.5.5.3/auth?id=${user}`).then((resp) => {
-  
-      const { id, pw, name, email } = resp.data;
-      setEditItem({ id, pw, name, email }); //오리지날 보존용
-      setUpdateItem({ id, pw, name, email }); // 업데이트용 (수정가능)
-    });
-  }, [complete]);
+useEffect(() => {
+  if (!user) return;
+
+  caxios.get(`/auth?id=${user}`).then((resp) => {
+    const { id, pw, name, email } = resp.data;
+    setEditItem({ id, pw, name, email });
+    setUpdateItem({ id, pw, name, email });
+  });
+}, [complete, user]);
 
 
 // ----------------------------------------------------------업데이트용 객체 / update (수정)
@@ -53,7 +55,7 @@ const handleInputChange = (e)=>{
   const handleUpdateCom = ()=>{
     setComplete(true);
     setUpdateItem(prev=>({...prev, id:editItem.id}));
-    axios.put(`http://10.5.5.3/auth?id=${user}`, updateItem);
+    caxios.put(`/auth?id=${user}`, updateItem);
     setEditing(false); //수정 불가
   }
 

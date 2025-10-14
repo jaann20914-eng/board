@@ -2,28 +2,25 @@ import { create } from "zustand";
 
 
 const useAuthStore = create((set) => ({
-
-    user: "",
-
+    token: "",
     isLogined: false,
+    user :"",
 
-    login: (user) => {
-        sessionStorage.setItem("loginId", user); // 세션 스토리지에 저장
+  login: (token, id) => {
+    set((state) => {
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("id", id);
+      return { token: token, isLogined: true, user:id };
+    });
+  },
 
-        set({ user: user, isLogined: true })
-    },
-
-    logout: () => {
-        sessionStorage.removeItem("loginId"); // 세션 스토리지에서 제거
-        set({ user: "", isLogined: false })
-    },
-
-    deleteUser: () => {
-        sessionStorage.removeItem("loginId");
-        set({ user: '', isLogined: false });
-    }
-
+  logout: () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("id");
+    set({ token: "", isLogined: false , user:""});
+  }
 
 }));
 
 export default useAuthStore;
+
